@@ -15,5 +15,7 @@ def category(request, category_id):
     return render(request, 'recipes/pages/category.html', context={'recipes': recipes, 'title': f'{recipes[0].category.name} - Category |'})
 
 def recipe(request, id):
-    return render(request, 'recipes/pages/recipe-view.html', context={'recipe': make_recipe(), 'is_detail_page': True,
+    recipe = Recipe.objects.filter(is_published=True).order_by('-id').first()
+
+    return render(request, 'recipes/pages/recipe-view.html', context={'recipe': recipe, 'is_detail_page': True,
     })
